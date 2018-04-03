@@ -1,0 +1,11 @@
+pipeline:
+  publish:
+    image: plugins/docker
+    privileged: true
+    repo: pingu/homeboard
+    tags: latest
+    secrets: [ docker_username, docker_password ]
+    build_args: ["--no-cache"]
+    when:
+      status: [ success ]
+      branch: [ master ]
