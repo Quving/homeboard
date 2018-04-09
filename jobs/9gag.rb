@@ -25,8 +25,6 @@ json_start_idx = page_str.index("{")
 json_end_idx  = page_str.rindex("}).")
 json_str =  page_str[json_start_idx..json_end_idx]
 json = JSON.parse(json_str)
-latest_animation = get_latest_animation(json)
-latest_photo = get_latest_photo(json)
 latest_post = get_latest_post(json)
 
 url_post = latest_post["url"]
