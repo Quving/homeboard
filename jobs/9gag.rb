@@ -28,4 +28,4 @@ json = JSON.parse(json_str)
 latest_post = get_latest_post(json)
 
 url_post = latest_post["url"]
-agent.get(url_post).save "9gag_medias/#{File.basename(url_post)}"
+agent.get(url_post).save! "9gag_medias/media#{File.extname(url_post)}"
