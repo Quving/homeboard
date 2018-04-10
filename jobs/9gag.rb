@@ -9,7 +9,6 @@ def extract_latest_posts_from_json(json)
     latest = {}
     json["data"]["posts"].each do |post|
         title = post["title"].sub! "&#039;", "'"
-        puts title
         post["images"].keys.each do |key|
             url = post["images"][key]["url"]
             ratio =  post["images"][key]["width"].to_f / post["images"][key]["height"].to_f
@@ -51,12 +50,8 @@ SCHEDULER.every '10s' do
     latest_posts = get_latest_posts()
     if latest_posts.key?("latest_photo")
         send_event("9gag-image", {title: latest_posts["latest_photo"]["title"], url: latest_posts["latest_photo"]["url"]})
-    else
-        puts "No keys found. #{latest_posts}"
     end
     if latest_posts.key?("latest_animation")
         send_event("9gag-video", {title: latest_posts["latest_animation"]["title"], url: latest_posts["latest_animation"]["url"]})
-    else
-        puts "No keys found. #{latest_posts}"
     end
 end
