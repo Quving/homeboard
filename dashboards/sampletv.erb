@@ -1,9 +1,8 @@
 <script type='text/javascript'>
- $(function() {
-   Dashing.gridsterLayout('[{"col":2,"row":1,"size_x":2,"size_y":1},{"col":5,"row":1,"size_x":1,"size_y":2},{"col":3,"row":2,"size_x":1,"size_y":1},{"col":1,"row":1,"size_x":1,"size_y":1},{"col":4,"row":1,"size_x":1,"size_y":1}]')
- });
+    $(function() {
+        Dashing.gridsterLayout('[{"col":2,"row":1,"size_x":2,"size_y":1},{"col":5,"row":1,"size_x":1,"size_y":2},{"col":3,"row":2,"size_x":1,"size_y":1},{"col":1,"row":1,"size_x":1,"size_y":1},{"col":4,"row":1,"size_x":1,"size_y":1},{"col":2,"row":2,"size_x":1,"size_y":1}]')
+    });
 </script>
-
 
 <% content_for :title do %>1080p dashboard<% end %>
 
@@ -28,6 +27,9 @@
 
         <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
             <div data-id="9gag-video" data-image="assets/images/media.mp4" data-view="Video"></div>
+        </li>
+        <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-view="AnalogClock"></div>
         </li>
     </ul>
 </div>
