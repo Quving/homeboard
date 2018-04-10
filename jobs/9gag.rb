@@ -45,7 +45,7 @@ def get_latest_posts
     return  extract_latest_posts_from_json(json)
 end
 
-SCHEDULER.every '10s' do
+SCHEDULER.every '60s' do
     latest_posts = get_latest_posts()
     if latest_posts.key?("latest_photo")
         send_event("9gag-image", {title: latest_posts["latest_photo"]["title"], url: latest_posts["latest_photo"]["url"]})
