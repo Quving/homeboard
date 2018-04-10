@@ -1,7 +1,8 @@
 <script type='text/javascript'>
     $(function() {
-        Dashing.gridsterLayout('[{"col":2,"row":1,"size_x":2,"size_y":1},{"col":4,"row":1,"size_x":1,"size_y":2},{"col":2,"row":2,"size_x":2,"size_y":1},{"col":1,"row":1,"size_x":1,"size_y":1}]')
+        Dashing.gridsterLayout('[{"col":2,"row":2,"size_x":2,"size_y":1},{"col":4,"row":1,"size_x":1,"size_y":2},{"col":3,"row":1,"size_x":1,"size_y":1},{"col":1,"row":1,"size_x":1,"size_y":1},{"col":2,"row":1,"size_x":1,"size_y":1}]')
     });
+</script>
 </script>
 
 <% content_for :title do %>My super sweet dashboard<% end %>
@@ -15,12 +16,16 @@
             <div data-id="hvv_hammerbrook" data-view="List" data-unordered="true" data-title="S Hammerbrook" data-moreinfo="# of times said around the office"></div>
         </li>
 
-        <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+        <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
             <div data-id="weather" data-view="Graph" data-title="Temperature in Celsius" style="background-color:#ff9618"></div>
         </li>
 
         <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-            <div data-id="9gag-image" data-image="/media.jpg"  data-view="Image"></div>
+            <div data-id="9gag-image" data-image="assets/images/media.jpg"  data-view="Image"></div>
+        </li>
+
+        <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="9gag-video" data-image="assets/images/media.mp4" data-view="Video"></div>
         </li>
 
     </ul>

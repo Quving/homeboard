@@ -20,13 +20,13 @@ def extract_latest_posts_from_json(json)
 
             if isPhoto
                 unless latest.has_key? "latest_photo"
-                    latest["latest_photo"] =  {"url" => url, "title" => title}
+                    latest["latest_photo"] =  {"url" => url, "title" => title, "type" => post["type"]}
                 end
             end
 
             if isAnimation
                 unless latest.has_key? "latest_animation"
-                    latest["latest_animation"] =  {"url" => url, "title" => title}
+                    latest["latest_animation"] =  {"url" => url, "title" => title, "type" => post["type"]}
                 end
             end
         end
@@ -52,4 +52,5 @@ SCHEDULER.every '10s' do
     latest_posts = get_latest_posts()
     puts latest_posts
     send_event("9gag-image", {title: latest_posts["latest_photo"]["title"], url: latest_posts["latest_photo"]["url"]})
+    send_event("9gag-video", {title: latest_posts["latest_animation"]["title"], url: latest_posts["latest_animation"]["url"]})
 end
