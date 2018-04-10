@@ -38,7 +38,7 @@ end
 # Returns the latest posted post. Can be type of photo as well as animation.
 def get_latest_posts
     agent = Mechanize.new
-    page = agent.get("https://9gag.com/fresh")
+    page = agent.get("https://9gag.com/trend")
     page = Nokogiri::HTML(page.body)
     page_str = page.css('script')[9].text
     json_start_idx = page_str.index("{")
@@ -48,7 +48,7 @@ def get_latest_posts
     return  extract_latest_posts_from_json(json)
 end
 
-SCHEDULER.every '10s' do
+SCHEDULER.every '30s' do
     latest_posts = get_latest_posts()
     puts latest_posts
     send_event("9gag-image", {title: latest_posts["latest_photo"]["title"], url: latest_posts["latest_photo"]["url"]})
