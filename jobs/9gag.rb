@@ -8,7 +8,10 @@ require 'json'
 def extract_latest_posts_from_json(json)
     latest = {}
     json["data"]["posts"].each do |post|
-        title = post["title"].sub! "&#039;", "'"
+        title = post["title"]
+        if title.include? "&#039;"
+            title = title.sub! "&#039;", "'"
+        end
         post["images"].keys.each do |key|
             url = post["images"][key]["url"]
             ratio =  post["images"][key]["width"].to_f / post["images"][key]["height"].to_f
@@ -16,16 +19,12 @@ def extract_latest_posts_from_json(json)
             isPhoto = (url.end_with? "jpg") and (post["type"].eql? "Photo")
             isAnimation = (url.end_with? "mp4") and (post["type"].eql? "Animated")
 
-            if isPhoto and ratio > 1
-                unless latest.has_key? "latest_photo"
-                    latest["latest_photo"] =  {"url" => url, "title" => title , "type" => post["type"], "ratio" => ratio}
-                end
+            if isPhoto and ratio > 1 and not latest.has_key? "latest_photo"
+                latest["latest_photo"] =  {"url" => url, "title" => title , "type" => post["type"], "ratio" => ratio}
             end
 
-            if isAnimation and ratio > 1
-                unless latest.has_key? "latest_animation"
-                    latest["latest_animation"] =  {"url" => url, "title" => title , "type" => post["type"], "ratio" => ratio}
-                end
+            if isAnimation and ratio > 1 and not  latest.has_key? "latest_animation"
+                latest["latest_animation"] =  {"url" => url, "title" => title , "type" => post["type"], "ratio" => ratio}
             end
         end
     end
