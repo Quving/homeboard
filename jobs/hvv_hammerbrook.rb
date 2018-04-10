@@ -17,11 +17,15 @@ end
 SCHEDULER.every '20s' do
     hvv_departures = {}
     departures_json = JSON.parse(get_departuretimes_hammerbrook())
-    departures_json["departures"].each do |line|
-        line_description = line["line"]["name"]
-        line_direction = line["line"]["direction"]
-        line_timeoffset = line["timeOffset"]
-        hvv_departures[line_direction+line_description+"#{line_timeoffset}"] = {label: line_description + " " + line_direction, value: "#{line_timeoffset}" + "m"}
+    if departures_json.key?("departures")
+        departures_json["departures"].each do |line|
+            line_description = line["line"]["name"]
+            line_direction = line["line"]["direction"]
+            line_timeoffset = line["timeOffset"]
+            hvv_departures[line_direction+line_description+"#{line_timeoffset}"] = {label: line_description + " " + line_direction, value: "#{line_timeoffset}" + "m"}
+        end
+    else
+        hvv_departures["outofservice"] = {label: "Currently out of service.", value: ""}
     end
-    send_event('hvv_hammerbrook', { items: hvv_departures.values})
+        send_event('hvv_hammerbrook', { items: hvv_departures.values})
 end
