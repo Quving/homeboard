@@ -12,6 +12,8 @@ def extract_latest_posts_from_json(json)
         if title.include? "&#039;"
             title = title.sub! "&#039;", "'"
         end
+        title = title.encode!('UTF-16', 'UTF-8')
+        puts title
         post["images"].keys.each do |key|
             url = post["images"][key]["url"]
             ratio =  post["images"][key]["width"].to_f / post["images"][key]["height"].to_f
