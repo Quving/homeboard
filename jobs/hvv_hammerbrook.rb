@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 
 def get_icon(line)
-    return  "http://www.geofox.de/icon_service/line?lineKey=ZVU-DB:S1_ZVU-DB_S-ZVU&height=17"
+    return "http://www.geofox.de/icon_service/line?lineKey=ZVU-DB:#{line}_ZVU-DB_S-ZVU&height=17"
 end
 def get_departuretimes_hammerbrook
     url = ENV["MOBISPRING_URL"]
@@ -25,8 +25,8 @@ SCHEDULER.every '20s' do
         departures_json["departures"].each do |line|
             line_description = line["line"]["name"]
             line_direction = line["line"]["direction"]
-            line_timeoffset = line["timeOffset"]
-            hvv_departures[line_direction+line_description+"#{line_timeoffset}"] = {url: get_icon(line_description), label: line_description + " " + line_direction, value: "#{line_timeoffset}" + "m"}
+            line_timeoffset = if line["timeOffset"].eql? 0 then "now" else "#{line["timeOffset"]}m" end
+            hvv_departures[line_direction+line_description+"#{line_timeoffset}"] = {url: get_icon(line_description), label: "   " + line_direction, value: "#{line_timeoffset}"}
         end
     else
         hvv_departures["outofservice"] = {label: "Currently out of service.", value: ""}
