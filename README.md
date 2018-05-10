@@ -1,1 +1,9 @@
-Check out http://shopify.github.com/dashing for more information.
+### Launch the board
+
+```
+docker run -it \
+    -e OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY \
+    -e MOBISPRING_URL=$MOBISPRING_URL \
+    -p 3030:3030 \
+    pingu/homeboard
+```
